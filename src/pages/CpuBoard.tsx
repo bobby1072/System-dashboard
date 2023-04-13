@@ -1,14 +1,17 @@
 import { useQuery } from "react-query";
 import MainAppBar from "../components/AppBar/AppBar";
-import { Grid, Paper } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useEffect } from "react";
+import ICpuType from "../common/ICpuType";
+import CpuGetter from "../utils/CpuGetter";
+import MainCpuGrid from "../components/CpuInformationDisplay/MainGrid";
 export default function CpuBoard() {
-  const { is } = window;
+  const { os, sys } = window;
   const {
     isLoading: cpuLoading,
     error: cpuError,
     data: cpuData,
-  } = useQuery("get-cpu-info", () => is.cpu(), {
+  } = useQuery<ICpuType>("get-cpu-info", () => CpuGetter.AllInfo(os, sys), {
     retryDelay: 1000,
     retry: (count) => count < 5,
   });
@@ -19,21 +22,20 @@ export default function CpuBoard() {
     <div>
       <MainAppBar />
       <div className="App-header">
-        <Paper>
-          <Grid
-            container
-            justifyContent="center"
-            alignItems="center"
-            direction="column"
-            spacing={2}
-          >
-            {cpuData && (
-              <Grid item>
-                <p>{}</p>
-              </Grid>
-            )}
-          </Grid>
-        </Paper>
+        {cpuLoading ? (
+          <Typography fontSize={50} variant="subtitle2">
+            Loading...
+          </Typography>
+        ) : (
+          <div style={{ width: "100%" }}>
+            {cpuData && <MainCpuGrid device={cpuData} />}
+          </div>
+        )}
+        {!cpuLoading && cpuError ? (
+          <Typography variant="subtitle2" fontSize={50}>
+            Error
+          </Typography>
+        ) : null}
       </div>
     </div>
   );

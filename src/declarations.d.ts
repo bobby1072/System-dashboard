@@ -1,3 +1,4 @@
 interface Window {
-  is: typeof import("systeminformation");
+  os: typeof import("os");
+  sys: typeof import("systeminformation");
 }

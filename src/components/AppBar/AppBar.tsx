@@ -44,7 +44,6 @@ export default function MainAppBar() {
       <Box
         sx={{
           boxShadow: "0 4px 16px rgba(0, 0, 0, 0.9)",
-          mb: 3,
         }}
       >
         <AppBar position="static" sx={{ padding: 1 }}>
