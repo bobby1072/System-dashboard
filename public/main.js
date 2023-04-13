@@ -2,7 +2,7 @@ const electron = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
 
-const { app, BrowserWindow } = electron;
+const { app, BrowserWindow, ipcMain } = electron;
 let mainWindow = null;
 app.on("ready", createWindow);
 app.on("window-all-closed", function () {
@@ -17,11 +17,16 @@ app.on("activate", function () {
 });
 function createWindow() {
   mainWindow = new BrowserWindow({
-    icon: __dirname + "/../src/images/logo.jpg",
+    title: "systems-dashboard",
     width: 1024,
     height: 1024,
-    title: "Systems dashboard",
+    webPreferences: {
+      contextIsolation: true,
+      nodeIntegration: true,
+      preload: path.join(__dirname, "./preload.js"),
+    },
   });
+
   mainWindow.loadURL(
     isDev
       ? "http://localhost:3000"
@@ -32,5 +37,9 @@ function createWindow() {
   });
   mainWindow.on("page-title-updated", function (e) {
     e.preventDefault();
+  });
+  ipcMain.on("example", (event, data) => {
+    console.log(`Received data from renderer process: ${data}`);
+    event.reply("example-reply", "Message received");
   });
 }
