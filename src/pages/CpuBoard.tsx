@@ -21,10 +21,10 @@ export default function CpuBoard() {
       });
     },
     retry: (count) => count < 5,
-    refetchInterval: 10,
+    refetchInterval: 1,
   });
   useEffect(() => {
-    if (allCpuData.length > 20) {
+    if (allCpuData.length > 30) {
       setCpuData((_) => {
         _.splice(0, 1);
         return _;

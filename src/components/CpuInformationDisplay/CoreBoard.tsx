@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import { Systeminformation } from "systeminformation";
 
 export default function CoreBoard({
@@ -6,5 +6,9 @@ export default function CoreBoard({
 }: {
   cpu: Systeminformation.CurrentLoadCpuData;
 }) {
-  return <Grid container direction="column" alignItems="center"></Grid>;
+  return (
+    <Paper>
+      <Grid container direction="column" alignItems="center"></Grid>
+    </Paper>
+  );
 }

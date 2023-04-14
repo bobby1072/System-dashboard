@@ -4,21 +4,6 @@ interface IMainCpuProps {
   device: ICpuType;
 }
 
-<Paper>
-  <Grid
-    container
-    direction="column"
-    alignItems="center"
-    justifyContent="center"
-    spacing={1}
-    padding={2}
-  >
-    <Grid item>
-      <p>bruh</p>
-    </Grid>
-  </Grid>
-</Paper>;
-
 export default function CpuTitle(props: IMainCpuProps) {
   const {
     device: { arch, cpuGenData, systemData },
