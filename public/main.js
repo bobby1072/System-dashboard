@@ -2,15 +2,15 @@ const electron = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
 
-const { app, BrowserWindow, ipcMain } = electron;
+const { app, BrowserWindow } = electron;
 let mainWindow = null;
 app.on("ready", createWindow);
-app.on("window-all-closed", function () {
+app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
   }
 });
-app.on("activate", function () {
+app.on("activate", () => {
   if (mainWindow === null) {
     createWindow();
   }
@@ -32,14 +32,10 @@ function createWindow() {
       ? "http://localhost:3000"
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
-  mainWindow.on("closed", function () {
+  mainWindow.on("closed", () => {
     mainWindow = null;
   });
-  mainWindow.on("page-title-updated", function (e) {
+  mainWindow.on("page-title-updated", (e) => {
     e.preventDefault();
-  });
-  ipcMain.on("example", (event, data) => {
-    console.log(`Received data from renderer process: ${data}`);
-    event.reply("example-reply", "Message received");
   });
 }

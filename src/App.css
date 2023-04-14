@@ -15,8 +15,8 @@
 
 .App-header {
   background-color: #dbe0e4;
-  padding: 4%;
-  min-height: 89vh;
+  padding: 2%;
+  min-height: 82vh;
   display: flex;
   flex-direction: column;
   align-items: center;

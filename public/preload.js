@@ -1,8 +1,7 @@
-const { contextBridge, ipcRenderer } = require("electron");
+const { contextBridge } = require("electron");
 const os = require("os");
 const sys = require("systeminformation");
+const osUtils = require("node-os-utils");
 contextBridge.exposeInMainWorld("os", os);
 contextBridge.exposeInMainWorld("sys", sys);
-ipcRenderer.on("example", (event, data) => {
-  console.log(`Received data from main process: ${data}`);
-});
+contextBridge.exposeInMainWorld("osUtils", osUtils);
