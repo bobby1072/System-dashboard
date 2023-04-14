@@ -1,27 +1,37 @@
 import { useQuery } from "react-query";
 import MainAppBar from "../components/AppBar/AppBar";
-import { Typography } from "@mui/material";
-import { useEffect } from "react";
+import { Typography, Grid } from "@mui/material";
+import { useEffect, useState } from "react";
 import ICpuType from "../common/ICpuType";
 import CpuGetter from "../utils/CpuGetter";
-import MainCpuGrid from "../components/CpuInformationDisplay/MainGrid";
+import CpuTitle from "../components/CpuInformationDisplay/MainGrid";
+import CpuDashboardDisplay from "../components/CpuInformationDisplay/DashBoardHome";
 export default function CpuBoard() {
-  const { os, sys, osUtils } = window;
+  const { os, sys } = window;
+  const [allCpuData, setCpuData] = useState<ICpuType[]>([]);
   const {
     isLoading: cpuLoading,
     error: cpuError,
     data: cpuData,
-  } = useQuery<ICpuType>(
-    "get-cpu-info",
-    () => CpuGetter.AllInfo(os, sys, osUtils),
-    {
-      retryDelay: 1000,
-      retry: (count) => count < 5,
-    }
-  );
+  } = useQuery<ICpuType>("get-cpu-info", () => CpuGetter.AllInfo(os, sys), {
+    retryDelay: 1000,
+    onSuccess: (data) => {
+      setCpuData((_) => {
+        return [..._, ...[data]];
+      });
+    },
+    retry: (count) => count < 5,
+    refetchInterval: 10,
+  });
   useEffect(() => {
-    console.log(cpuData);
-  }, [cpuData]);
+    if (allCpuData.length > 20) {
+      setCpuData((_) => {
+        _.splice(0, 1);
+        return _;
+      });
+    }
+    console.log(allCpuData);
+  }, [allCpuData]);
   return (
     <div>
       <MainAppBar />
@@ -35,7 +45,22 @@ export default function CpuBoard() {
           </Typography>
         ) : (
           <div style={{ width: "90%" }}>
-            {cpuData && <MainCpuGrid device={cpuData} />}
+            {cpuData && allCpuData.length > 0 && (
+              <Grid
+                container
+                spacing={2}
+                direction="column"
+                justifyContent="center"
+                width="100%"
+              >
+                <Grid item>
+                  <CpuTitle device={cpuData} />
+                </Grid>
+                <Grid item>
+                  <CpuDashboardDisplay cpuInfo={allCpuData} />
+                </Grid>
+              </Grid>
+            )}
           </div>
         )}
         {!cpuLoading && cpuError ? (

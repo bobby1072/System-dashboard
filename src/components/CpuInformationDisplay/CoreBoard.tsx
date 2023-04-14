@@ -1,5 +1,10 @@
-import { CpuInfo } from "os";
-interface ICoreBoardProps {
-  core: CpuInfo;
+import { Grid } from "@mui/material";
+import { Systeminformation } from "systeminformation";
+
+export default function CoreBoard({
+  cpu,
+}: {
+  cpu: Systeminformation.CurrentLoadCpuData;
+}) {
+  return <Grid container direction="column" alignItems="center"></Grid>;
 }
-export default function CoreBoard() {}
