@@ -24,7 +24,7 @@ export default function CpuBoard() {
     refetchInterval: 1,
   });
   useEffect(() => {
-    if (allCpuData.length > 30) {
+    if (allCpuData.length > 51) {
       setCpuData((_) => {
         _.splice(0, 1);
         return _;

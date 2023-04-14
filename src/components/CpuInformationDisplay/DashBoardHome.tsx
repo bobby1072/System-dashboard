@@ -1,12 +1,13 @@
-import { Grid, Paper } from "@mui/material";
+import { Grid, Paper, useTheme } from "@mui/material";
 import ICpuType from "../../common/ICpuType";
 import Chart from "react-apexcharts";
-import ApexCharts from "react-apexcharts";
+import ProcessorTab from "./ProcessorTab";
 export default function CpuDashboardDisplay({
   cpuInfo,
 }: {
   cpuInfo: ICpuType[];
 }) {
+  const theme = useTheme();
   const lineDataFormat: {
     series: ApexAxisChartSeries | ApexNonAxisChartSeries;
     options: ApexCharts.ApexOptions;
@@ -14,9 +15,10 @@ export default function CpuDashboardDisplay({
     series: [
       {
         name: "overall cpu usage",
+        color: theme.palette.primary.main,
         data: cpuInfo
-          .slice(Math.max(cpuInfo.length - 30, 0))
-          .map<number>((x) => x.usagePerc.currentLoad),
+          .map<number>((x) => x.usagePerc.currentLoad)
+          .slice(Math.max(cpuInfo.length - 50, 0)),
       },
     ],
     options: {
@@ -45,7 +47,7 @@ export default function CpuDashboardDisplay({
       },
       grid: {
         row: {
-          colors: ["#f3f3f3", "transparent"],
+          colors: ["#f5f5f5"],
           opacity: 0.5,
         },
       },
@@ -73,20 +75,37 @@ export default function CpuDashboardDisplay({
     <Paper>
       <Grid
         container
-        direction="column"
+        direction="row"
         alignItems="center"
         justifyContent="center"
         spacing={1}
         padding={2}
       >
         <Grid item width="50%" height="36vh">
-          <Chart
-            options={lineDataFormat.options}
-            series={lineDataFormat.series}
-            width="100%"
-            height="100%"
-            type="line"
-          />
+          <Paper sx={{ backgroundColor: "#f5f5f5", height: "36vh" }}>
+            <Grid
+              container
+              height="36vh"
+              width="100%"
+              alignItems="center"
+              justifyContent="center"
+              spacing={1}
+              padding={2}
+            >
+              <Grid item height="100%" width="100%">
+                <Chart
+                  options={lineDataFormat.options}
+                  series={lineDataFormat.series}
+                  width="100%"
+                  height="100%"
+                  type="line"
+                />
+              </Grid>
+            </Grid>
+          </Paper>
+        </Grid>
+        <Grid item width="50%" height="36vh">
+          <ProcessorTab cpu={cpuInfo[cpuInfo.length - 1]} />
         </Grid>
       </Grid>
     </Paper>
