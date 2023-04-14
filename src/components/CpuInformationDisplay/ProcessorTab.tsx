@@ -11,6 +11,7 @@ export default function ProcessorTab({ cpu }: { cpu: ICpuType }) {
         justifyContent="center"
         width="100%"
         height="36vh"
+        minWidth="18vh"
         spacing={1}
         padding={2}
       >

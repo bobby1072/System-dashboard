@@ -1,11 +1,12 @@
 import { useQuery } from "react-query";
 import MainAppBar from "../components/AppBar/AppBar";
-import { Typography, Grid } from "@mui/material";
+import { Typography, Grid, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
 import ICpuType from "../common/ICpuType";
 import CpuGetter from "../utils/CpuGetter";
 import CpuTitle from "../components/CpuInformationDisplay/MainGrid";
 import CpuDashboardDisplay from "../components/CpuInformationDisplay/DashBoardHome";
+import CoreBoard from "../components/CpuInformationDisplay/CoreBoard";
 export default function CpuBoard() {
   const { os, sys } = window;
   const [allCpuData, setCpuData] = useState<ICpuType[]>([]);
@@ -52,12 +53,34 @@ export default function CpuBoard() {
                 direction="column"
                 justifyContent="center"
                 width="100%"
+                minWidth="50vh"
               >
                 <Grid item>
                   <CpuTitle device={cpuData} />
                 </Grid>
                 <Grid item>
                   <CpuDashboardDisplay cpuInfo={allCpuData} />
+                </Grid>
+                <Grid item>
+                  <Paper>
+                    <Grid
+                      container
+                      direction="row"
+                      alignItems="center"
+                      justifyContent="center"
+                      padding={2}
+                      spacing={1}
+                      width="100%"
+                    >
+                      {allCpuData[allCpuData.length - 1].usagePerc.cpus.map(
+                        (x) => (
+                          <Grid item width="50%">
+                            <CoreBoard cpu={x} />
+                          </Grid>
+                        )
+                      )}
+                    </Grid>
+                  </Paper>
                 </Grid>
               </Grid>
             )}

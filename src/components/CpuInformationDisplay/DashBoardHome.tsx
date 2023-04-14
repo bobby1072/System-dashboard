@@ -80,13 +80,15 @@ export default function CpuDashboardDisplay({
         justifyContent="center"
         spacing={1}
         padding={2}
+        minHeight="36vh"
       >
-        <Grid item width="50%" height="36vh">
+        <Grid item minWidth="18vh" width="50%">
           <Paper sx={{ backgroundColor: "#f5f5f5", height: "36vh" }}>
             <Grid
               container
               height="36vh"
               width="100%"
+              minWidth="18vh"
               alignItems="center"
               justifyContent="center"
               spacing={1}
@@ -104,7 +106,7 @@ export default function CpuDashboardDisplay({
             </Grid>
           </Paper>
         </Grid>
-        <Grid item width="50%" height="36vh">
+        <Grid item width="50%" minWidth="18vh">
           <ProcessorTab cpu={cpuInfo[cpuInfo.length - 1]} />
         </Grid>
       </Grid>
