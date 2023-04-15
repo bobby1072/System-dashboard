@@ -1,13 +1,14 @@
-import { Grid, Paper, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import GaugeChart from "react-gauge-chart";
 import { Systeminformation } from "systeminformation";
+import { StyledBoxPaper } from "../../common/StyledPaper";
 export default function CoreBoard({
   cpu,
 }: {
   cpu: Systeminformation.CurrentLoadCpuData;
 }) {
   return (
-    <Paper sx={{ backgroundColor: "#f5f5f5" }}>
+    <StyledBoxPaper>
       <Grid
         container
         direction="column"
@@ -41,6 +42,6 @@ export default function CoreBoard({
           </div>
         </Grid>
       </Grid>
-    </Paper>
+    </StyledBoxPaper>
   );
 }

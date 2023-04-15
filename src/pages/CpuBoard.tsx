@@ -83,7 +83,6 @@ export default function CpuBoard() {
         return _;
       });
     }
-    console.log(allCpuData);
   }, [allCpuData]);
   return (
     <div>
@@ -113,9 +112,15 @@ export default function CpuBoard() {
                 <Grid item>
                   <CpuDashboardDisplay cpuInfo={allCpuData} />
                 </Grid>
-                <Grid item>
+                <Grid item alignItems="center" justifyContent="center">
                   <Paper>
-                    <Grid container direction="row" padding={2}>
+                    <Grid
+                      container
+                      direction="row"
+                      padding={2}
+                      width="100%"
+                      minWidth="36vh"
+                    >
                       <Grid item>
                         <FormControlLabel
                           control={
@@ -139,15 +144,15 @@ export default function CpuBoard() {
                       container
                       direction="row"
                       alignItems="center"
-                      justifyContent="center"
                       padding={2}
                       spacing={1}
+                      minWidth="36vh"
                       width="100%"
                     >
                       {allCores
                         ? allCpuData[allCpuData.length - 1].usagePerc.cpus.map(
                             (x) => (
-                              <Grid item width="50%">
+                              <Grid item width="50%" minWidth="18vh">
                                 <CoreBoard cpu={x} />
                               </Grid>
                             )
@@ -155,7 +160,7 @@ export default function CpuBoard() {
                         : averageLoadCpuData(
                             allCpuData[allCpuData.length - 1].usagePerc.cpus
                           ).map((x) => (
-                            <Grid item width="50%">
+                            <Grid item width="50%" minWidth="18vh">
                               <CoreBoard cpu={x} />
                             </Grid>
                           ))}

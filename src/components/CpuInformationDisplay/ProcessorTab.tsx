@@ -1,9 +1,10 @@
-import { Grid, Paper, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import ICpuType from "../../common/ICpuType";
 import MemoryIcon from "@mui/icons-material/Memory";
+import { StyledBoxPaper } from "../../common/StyledPaper";
 export default function ProcessorTab({ cpu }: { cpu: ICpuType }) {
   return (
-    <Paper sx={{ backgroundColor: "#f5f5f5" }}>
+    <StyledBoxPaper>
       <Grid
         container
         direction="row"
@@ -64,6 +65,6 @@ export default function ProcessorTab({ cpu }: { cpu: ICpuType }) {
           </Grid>
         </Grid>
       </Grid>
-    </Paper>
+    </StyledBoxPaper>
   );
 }

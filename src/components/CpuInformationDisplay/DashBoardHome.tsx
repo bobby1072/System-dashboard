@@ -2,11 +2,20 @@ import { Grid, Paper, useTheme } from "@mui/material";
 import ICpuType from "../../common/ICpuType";
 import Chart from "react-apexcharts";
 import ProcessorTab from "./ProcessorTab";
+import { StyledBoxPaper } from "../../common/StyledPaper";
 export default function CpuDashboardDisplay({
   cpuInfo,
 }: {
   cpuInfo: ICpuType[];
 }) {
+  let startDataArray: number[] = cpuInfo.map<number>(
+    (x) => x.usagePerc.currentLoad
+  );
+  if (cpuInfo.length < 10) {
+    for (let i = 0; i < 10 - cpuInfo.length; i++) {
+      startDataArray.unshift(0);
+    }
+  }
   const theme = useTheme();
   const lineDataFormat: {
     series: ApexAxisChartSeries | ApexNonAxisChartSeries;
@@ -16,9 +25,7 @@ export default function CpuDashboardDisplay({
       {
         name: "overall cpu usage",
         color: theme.palette.primary.main,
-        data: cpuInfo
-          .map<number>((x) => x.usagePerc.currentLoad)
-          .slice(Math.max(cpuInfo.length - 50, 0)),
+        data: startDataArray.slice(Math.max(cpuInfo.length - 50, 0)),
       },
     ],
     options: {
@@ -83,7 +90,7 @@ export default function CpuDashboardDisplay({
         minHeight="36vh"
       >
         <Grid item minWidth="18vh" width="50%">
-          <Paper sx={{ backgroundColor: "#f5f5f5", height: "36vh" }}>
+          <StyledBoxPaper sx={{ height: "36vh" }}>
             <Grid
               container
               height="36vh"
@@ -104,7 +111,7 @@ export default function CpuDashboardDisplay({
                 />
               </Grid>
             </Grid>
-          </Paper>
+          </StyledBoxPaper>
         </Grid>
         <Grid item width="50%" minWidth="18vh">
           <ProcessorTab cpu={cpuInfo[cpuInfo.length - 1]} />
