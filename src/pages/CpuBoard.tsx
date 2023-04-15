@@ -60,6 +60,8 @@ function averageLoadCpuData(
 }
 export default function CpuBoard() {
   const { os, sys } = window;
+  const [focusedCore, setFocusedCore] =
+    useState<Systeminformation.CurrentLoadCpuData[]>();
   const [allCpuData, setCpuData] = useState<ICpuType[]>([]);
   const [allCores, setAllCores] = useState<boolean>(false);
   const {
@@ -135,7 +137,7 @@ export default function CpuBoard() {
                               }}
                             />
                           }
-                          label="Performance cores"
+                          label="Show performance cores"
                         />
                       </Grid>
                     </Grid>
@@ -151,17 +153,42 @@ export default function CpuBoard() {
                     >
                       {allCores
                         ? allCpuData[allCpuData.length - 1].usagePerc.cpus.map(
-                            (x) => (
+                            (x, index) => (
                               <Grid item width="50%" minWidth="18vh">
-                                <CoreBoard cpu={x} />
+                                <CoreBoard
+                                  setFocusedCore={(
+                                    data?: Systeminformation.CurrentLoadCpuData[]
+                                  ) => {
+                                    setFocusedCore(data);
+                                  }}
+                                  allCpuData={allCpuData.map((deepX) => {
+                                    return deepX.usagePerc.cpus.find(
+                                      (cpuFinder, cpuIndex) =>
+                                        cpuIndex === index
+                                    )!;
+                                  })}
+                                />
                               </Grid>
                             )
                           )
                         : averageLoadCpuData(
                             allCpuData[allCpuData.length - 1].usagePerc.cpus
-                          ).map((x) => (
+                          ).map((x, index) => (
                             <Grid item width="50%" minWidth="18vh">
-                              <CoreBoard cpu={x} />
+                              <CoreBoard
+                                setFocusedCore={(
+                                  data?: Systeminformation.CurrentLoadCpuData[]
+                                ) => {
+                                  setFocusedCore(data);
+                                }}
+                                allCpuData={allCpuData.map((deepX) => {
+                                  return averageLoadCpuData(
+                                    deepX.usagePerc.cpus
+                                  ).find(
+                                    (cpuFinder, cpuIndex) => cpuIndex === index
+                                  )!;
+                                })}
+                              />
                             </Grid>
                           ))}
                     </Grid>

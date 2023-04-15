@@ -1,11 +1,13 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, Button } from "@mui/material";
 import GaugeChart from "react-gauge-chart";
 import { Systeminformation } from "systeminformation";
 import { StyledBoxPaper } from "../../common/StyledPaper";
 export default function CoreBoard({
-  cpu,
+  allCpuData,
+  setFocusedCore,
 }: {
-  cpu: Systeminformation.CurrentLoadCpuData;
+  allCpuData: Systeminformation.CurrentLoadCpuData[];
+  setFocusedCore: (data?: Systeminformation.CurrentLoadCpuData[]) => void;
 }) {
   return (
     <StyledBoxPaper>
@@ -15,6 +17,7 @@ export default function CoreBoard({
         alignItems="center"
         justifyContent="center"
         padding={2}
+        spacing={1}
         minWidth="60vh"
         minHeight="30vh"
       >
@@ -25,7 +28,10 @@ export default function CoreBoard({
                 <GaugeChart
                   id="gauge-chart1"
                   nrOfLevels={30}
-                  percent={Number(cpu.load.toFixed(1)) / 100}
+                  percent={
+                    Number(allCpuData[allCpuData.length - 1].load.toFixed(1)) /
+                    100
+                  }
                   colors={["#FF5F6D", "#FFC371"]}
                   arcWidth={0.3}
                   textColor={"#333"}
@@ -35,11 +41,21 @@ export default function CoreBoard({
               </Grid>
               <Grid item>
                 <Typography fontSize={20} variant="subtitle2">
-                  Usage: {cpu.load.toFixed(1)}%
+                  Usage: {allCpuData[allCpuData.length - 1].load.toFixed(1)}%
                 </Typography>
               </Grid>
             </Grid>
           </div>
+        </Grid>
+        <Grid item>
+          <Button
+            variant="outlined"
+            onClick={() => {
+              setFocusedCore(allCpuData);
+            }}
+          >
+            View percentage chart
+          </Button>
         </Grid>
       </Grid>
     </StyledBoxPaper>
