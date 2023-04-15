@@ -1,4 +1,5 @@
-import { Grid, Paper } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
+import GaugeChart from "react-gauge-chart";
 import { Systeminformation } from "systeminformation";
 export default function CoreBoard({
   cpu,
@@ -17,7 +18,27 @@ export default function CoreBoard({
         minHeight="30vh"
       >
         <Grid item>
-          <p>Bruh</p>
+          <div className="gauge-container">
+            <Grid container alignItems="center" direction="column">
+              <Grid item>
+                <GaugeChart
+                  id="gauge-chart1"
+                  nrOfLevels={30}
+                  percent={Number(cpu.load.toFixed(1)) / 100}
+                  colors={["#FF5F6D", "#FFC371"]}
+                  arcWidth={0.3}
+                  textColor={"#333"}
+                  animate={false}
+                  needleColor={"#333"}
+                />
+              </Grid>
+              <Grid item>
+                <Typography fontSize={20} variant="subtitle2">
+                  Usage: {cpu.load.toFixed(1)}%
+                </Typography>
+              </Grid>
+            </Grid>
+          </div>
         </Grid>
       </Grid>
     </Paper>

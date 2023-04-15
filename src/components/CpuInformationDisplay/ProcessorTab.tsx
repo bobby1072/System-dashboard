@@ -58,7 +58,7 @@ export default function ProcessorTab({ cpu }: { cpu: ICpuType }) {
             </Grid>
             <Grid item>
               <Typography fontSize={14} variant="subtitle2">
-                Live CPU usage: {cpu.usagePerc.currentLoad.toFixed(1)}%
+                Live overall CPU usage: {cpu.usagePerc.currentLoad.toFixed(1)}%
               </Typography>
             </Grid>
           </Grid>

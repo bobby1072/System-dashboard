@@ -1,15 +1,67 @@
 import { useQuery } from "react-query";
 import MainAppBar from "../components/AppBar/AppBar";
-import { Typography, Grid, Paper } from "@mui/material";
+import {
+  Typography,
+  Grid,
+  Paper,
+  Divider,
+  Switch,
+  FormControlLabel,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import ICpuType from "../common/ICpuType";
 import CpuGetter from "../utils/CpuGetter";
 import CpuTitle from "../components/CpuInformationDisplay/MainGrid";
 import CpuDashboardDisplay from "../components/CpuInformationDisplay/DashBoardHome";
 import CoreBoard from "../components/CpuInformationDisplay/CoreBoard";
+import { Systeminformation } from "systeminformation";
+function averageLoadCpuData(
+  data: Systeminformation.CurrentLoadCpuData[]
+): Systeminformation.CurrentLoadCpuData[] {
+  const result = [];
+
+  for (let i = 0; i < data.length; i += 2) {
+    const {
+      load,
+      loadUser,
+      loadSystem,
+      loadNice,
+      loadIdle,
+      loadIrq,
+      rawLoad,
+      rawLoadUser,
+      rawLoadSystem,
+      rawLoadNice,
+      rawLoadIdle,
+      rawLoadIrq,
+    } = data[i];
+
+    const nextData = data[i + 1];
+
+    const avgItem = {
+      load: (load + (nextData?.load || 0)) / 2,
+      loadUser: (loadUser + (nextData?.loadUser || 0)) / 2,
+      loadSystem: (loadSystem + (nextData?.loadSystem || 0)) / 2,
+      loadNice: (loadNice + (nextData?.loadNice || 0)) / 2,
+      loadIdle: (loadIdle + (nextData?.loadIdle || 0)) / 2,
+      loadIrq: (loadIrq + (nextData?.loadIrq || 0)) / 2,
+      rawLoad: (rawLoad + (nextData?.rawLoad || 0)) / 2,
+      rawLoadUser: (rawLoadUser + (nextData?.rawLoadUser || 0)) / 2,
+      rawLoadSystem: (rawLoadSystem + (nextData?.rawLoadSystem || 0)) / 2,
+      rawLoadNice: (rawLoadNice + (nextData?.rawLoadNice || 0)) / 2,
+      rawLoadIdle: (rawLoadIdle + (nextData?.rawLoadIdle || 0)) / 2,
+      rawLoadIrq: (rawLoadIrq + (nextData?.rawLoadIrq || 0)) / 2,
+    };
+
+    result.push(avgItem);
+  }
+
+  return result;
+}
 export default function CpuBoard() {
   const { os, sys } = window;
   const [allCpuData, setCpuData] = useState<ICpuType[]>([]);
+  const [allCores, setAllCores] = useState<boolean>(false);
   const {
     isLoading: cpuLoading,
     error: cpuError,
@@ -63,6 +115,26 @@ export default function CpuBoard() {
                 </Grid>
                 <Grid item>
                   <Paper>
+                    <Grid container direction="row" padding={2}>
+                      <Grid item>
+                        <FormControlLabel
+                          control={
+                            <Switch
+                              checked={allCores}
+                              onChange={() => {
+                                if (allCores) {
+                                  setAllCores(false);
+                                } else {
+                                  setAllCores(true);
+                                }
+                              }}
+                            />
+                          }
+                          label="Performance cores"
+                        />
+                      </Grid>
+                    </Grid>
+                    <Divider />
                     <Grid
                       container
                       direction="row"
@@ -72,13 +144,21 @@ export default function CpuBoard() {
                       spacing={1}
                       width="100%"
                     >
-                      {allCpuData[allCpuData.length - 1].usagePerc.cpus.map(
-                        (x) => (
-                          <Grid item width="50%">
-                            <CoreBoard cpu={x} />
-                          </Grid>
-                        )
-                      )}
+                      {allCores
+                        ? allCpuData[allCpuData.length - 1].usagePerc.cpus.map(
+                            (x) => (
+                              <Grid item width="50%">
+                                <CoreBoard cpu={x} />
+                              </Grid>
+                            )
+                          )
+                        : averageLoadCpuData(
+                            allCpuData[allCpuData.length - 1].usagePerc.cpus
+                          ).map((x) => (
+                            <Grid item width="50%">
+                              <CoreBoard cpu={x} />
+                            </Grid>
+                          ))}
                     </Grid>
                   </Paper>
                 </Grid>
