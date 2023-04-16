@@ -1,6 +1,5 @@
 import { Grid, Paper, useTheme } from "@mui/material";
 import ICpuType from "../../common/ICpuType";
-import Chart from "react-apexcharts";
 import ProcessorTab from "./ProcessorTab";
 import { StyledBoxPaper } from "../../common/StyledPaper";
 import CpuChart from "../../common/CpuChart";
@@ -49,7 +48,7 @@ export default function CpuDashboardDisplay({
               padding={2}
             >
               <Grid item height="100%" width="100%">
-                <CpuChart series={lineDataFormat} />
+                <CpuChart series={lineDataFormat} title="overall cpu usage" />
               </Grid>
             </Grid>
           </StyledBoxPaper>

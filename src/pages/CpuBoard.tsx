@@ -15,6 +15,7 @@ import CpuTitle from "../components/CpuInformationDisplay/MainGrid";
 import CpuDashboardDisplay from "../components/CpuInformationDisplay/DashBoardHome";
 import CoreBoard from "../components/CpuInformationDisplay/CoreBoard";
 import { Systeminformation } from "systeminformation";
+import CoreModal from "../components/CpuInformationDisplay/CpuModal";
 function averageLoadCpuData(
   data: Systeminformation.CurrentLoadCpuData[]
 ): Systeminformation.CurrentLoadCpuData[] {
@@ -203,6 +204,12 @@ export default function CpuBoard() {
             {cpuError instanceof Error ? cpuError.message : "Error..."}
           </Typography>
         ) : null}
+        {focusedCore && (
+          <CoreModal
+            closeFunc={() => setFocusedCore(undefined)}
+            core={focusedCore}
+          />
+        )}
       </div>
     </div>
   );

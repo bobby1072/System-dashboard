@@ -1,12 +1,14 @@
 import Chart from "react-apexcharts";
 export default function CpuChart({
   series,
+  title,
 }: {
   series: ApexAxisChartSeries | ApexNonAxisChartSeries;
+  title: string;
 }) {
   const options: ApexCharts.ApexOptions = {
     chart: {
-      id: "overall cpu usage",
+      id: title,
       type: "line",
       animations: {
         enabled: false,
@@ -25,7 +27,7 @@ export default function CpuChart({
       curve: "straight",
     },
     title: {
-      text: "overall cpu usage",
+      text: title,
       align: "center",
     },
     grid: {
