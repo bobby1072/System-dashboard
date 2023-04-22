@@ -68,7 +68,7 @@ export default function CpuBoard() {
     error: cpuError,
     data: cpuData,
   } = useQuery<ICpuType>("get-cpu-info", () => CpuGetter.AllInfo(os, sys), {
-    retryDelay: 1000,
+    retryDelay: 500,
     onSuccess: (data) => {
       setCpuData((_) => {
         return [..._, ...[data]];
