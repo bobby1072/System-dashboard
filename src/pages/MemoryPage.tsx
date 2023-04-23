@@ -1,7 +1,6 @@
 import { useQuery } from "react-query";
 import MainAppBar from "../components/AppBar/AppBar";
 import MemoryGetter from "../utils/MemoryGetter";
-import { useEffect } from "react";
 import { Typography, Grid } from "@mui/material";
 import IMemType from "../common/IMemType";
 export default function MemoryPage() {
@@ -10,14 +9,18 @@ export default function MemoryPage() {
     isLoading: memLoading,
     data: memData,
     error: memError,
-  } = useQuery<IMemType>("get-memory", () => MemoryGetter.AllInfo(os, sys), {
-    retryDelay: 500,
-    retry: (count) => count < 5,
-    refetchInterval: 1,
-  });
-  useEffect(() => {
-    console.log(memData);
-  }, [memData]);
+  } = useQuery<IMemType>(
+    "get-memory-info",
+    () => MemoryGetter.AllInfo(os, sys),
+    {
+      retryDelay: 500,
+      retry: (count) => count < 5,
+      refetchInterval: 1,
+      onSuccess: (data) => {
+        console.log(data);
+      },
+    }
+  );
   return (
     <div>
       <MainAppBar />
@@ -39,7 +42,9 @@ export default function MemoryPage() {
                 justifyContent="center"
                 width="100%"
                 minWidth="50vh"
-              ></Grid>
+              >
+                <Grid item></Grid>
+              </Grid>
             )}
           </div>
         )}

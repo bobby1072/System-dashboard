@@ -11,7 +11,6 @@ export default abstract class MemoryGetter extends IGetter {
       memory: mem,
       memoryLayout: memLay,
       totalMem: os.totalmem(),
-      freeMem: os.freemem(),
     };
   }
 }
