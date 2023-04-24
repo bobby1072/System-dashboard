@@ -1,7 +1,6 @@
-import { Grid, Paper, useTheme } from "@mui/material";
+import { Grid, Paper, Typography, useTheme } from "@mui/material";
 import { StyledBoxPaper } from "../../common/StyledPaper";
 import ReactApexChart from "react-apexcharts";
-import { useState } from "react";
 
 interface IMemoryStackedBarProps {
   activeMem: number;
@@ -10,7 +9,6 @@ interface IMemoryStackedBarProps {
 export default function MemoryStackedBar(props: IMemoryStackedBarProps) {
   const { activeMem, totalMem } = props;
   const theme = useTheme();
-  const [percentShow, setPercentShow] = useState<boolean>(false);
   const [options, series]: [ApexCharts.ApexOptions, ApexAxisChartSeries] = [
     {
       legend: {
@@ -49,7 +47,7 @@ export default function MemoryStackedBar(props: IMemoryStackedBarProps) {
       dataLabels: {
         enabled: true,
         formatter: (val) => {
-          return (Number(val) / 1073741824).toFixed(2) + "GB";
+          return (Number(val) / 1073741824).toFixed(2) + " GB";
         },
         offsetY: -20,
         style: {
@@ -106,24 +104,22 @@ export default function MemoryStackedBar(props: IMemoryStackedBarProps) {
               alignItems="center"
               justifyContent="center"
               padding={1}
+              spacing={1}
               direction="column"
             >
               <Grid item width="100%" height="36vh">
-                <div
-                  onClick={() => {
-                    if (percentShow) setPercentShow(false);
-                    else setPercentShow(true);
-                  }}
-                  style={{ cursor: "pointer", width: "100%", height: "36vh" }}
-                >
-                  <ReactApexChart
-                    options={options}
-                    series={series}
-                    type="bar"
-                    width="100%"
-                    height="100%"
-                  />
-                </div>
+                <ReactApexChart
+                  options={options}
+                  series={series}
+                  type="bar"
+                  width="100%"
+                  height="100%"
+                />
+              </Grid>
+              <Grid item>
+                <Typography fontSize={30} variant="subtitle2">
+                  Total storage: {(totalMem / 1073741824).toFixed(2)} GB
+                </Typography>
               </Grid>
             </Grid>
           </StyledBoxPaper>

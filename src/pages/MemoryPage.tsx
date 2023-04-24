@@ -67,17 +67,25 @@ export default function MemoryPage() {
                 </Grid>
                 <Grid item>
                   <Paper>
+                    <Typography
+                      fontSize={45}
+                      variant="subtitle2"
+                      textAlign="center"
+                      padding={2}
+                    >
+                      Individual RAM sticks
+                    </Typography>
                     <Grid
                       container
                       justifyContent="center"
                       alignItems="center"
                       textAlign="center"
                       direction="row"
-                      padding={1}
+                      padding={2}
                       spacing={1}
                     >
-                      {memData.memoryLayout.map((x) => (
-                        <Grid item>
+                      {memData.memoryLayout.map((x, index) => (
+                        <Grid item width="50%" minHeight="25vh">
                           <StyledBoxPaper>
                             <Grid
                               container
@@ -95,6 +103,11 @@ export default function MemoryPage() {
                               <Grid item>
                                 <Grid container direction="column" spacing={1}>
                                   <Grid item>
+                                    <Typography fontSize={20}>
+                                      RAM stick: {index + 1}
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item>
                                     <Typography
                                       fontSize={15}
                                       variant="subtitle2"
@@ -107,7 +120,9 @@ export default function MemoryPage() {
                                       fontSize={15}
                                       variant="subtitle2"
                                     >
-                                      Speed: {x.clockSpeed}
+                                      Speed:{" "}
+                                      {(Number(x.clockSpeed) / 1000).toFixed(2)}{" "}
+                                      GHz
                                     </Typography>
                                   </Grid>
                                   <Grid item>
@@ -116,6 +131,15 @@ export default function MemoryPage() {
                                       variant="subtitle2"
                                     >
                                       Type: {x.type}
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item>
+                                    <Typography
+                                      fontSize={15}
+                                      variant="subtitle2"
+                                    >
+                                      Size: {(x.size / 1073741824).toFixed(2)}{" "}
+                                      GB
                                     </Typography>
                                   </Grid>
                                 </Grid>
