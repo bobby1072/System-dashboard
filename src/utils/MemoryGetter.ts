@@ -10,7 +10,6 @@ export default abstract class MemoryGetter extends IGetter {
     return {
       memory: mem,
       memoryLayout: memLay,
-      totalMem: os.totalmem(),
     };
   }
 }

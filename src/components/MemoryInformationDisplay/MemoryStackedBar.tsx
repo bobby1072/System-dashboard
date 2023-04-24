@@ -13,6 +13,9 @@ export default function MemoryStackedBar(props: IMemoryStackedBarProps) {
   const [percentShow, setPercentShow] = useState<boolean>(false);
   const [options, series]: [ApexCharts.ApexOptions, ApexAxisChartSeries] = [
     {
+      legend: {
+        fontSize: "25px",
+      },
       chart: {
         id: "Free memory",
         stacked: true,
@@ -29,7 +32,7 @@ export default function MemoryStackedBar(props: IMemoryStackedBarProps) {
         },
       },
       title: {
-        text: "Free memory",
+        text: "Memory usage",
         align: "center",
         style: {
           fontSize: "25px",

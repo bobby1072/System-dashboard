@@ -3,7 +3,9 @@ import MainAppBar from "../components/AppBar/AppBar";
 import MemoryGetter from "../utils/MemoryGetter";
 import { Typography, Grid, Paper } from "@mui/material";
 import IMemType from "../common/IMemType";
+import StorageIcon from "@mui/icons-material/Storage";
 import MemoryStackedBar from "../components/MemoryInformationDisplay/MemoryStackedBar";
+import { StyledBoxPaper } from "../common/StyledPaper";
 export default function MemoryPage() {
   const { os, sys } = window;
   const {
@@ -60,6 +62,68 @@ export default function MemoryPage() {
                           System RAM {"(Random-Access-Memory)"} Information
                         </Typography>
                       </Grid>
+                    </Grid>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <Paper>
+                    <Grid
+                      container
+                      justifyContent="center"
+                      alignItems="center"
+                      textAlign="center"
+                      direction="row"
+                      padding={1}
+                      spacing={1}
+                    >
+                      {memData.memoryLayout.map((x) => (
+                        <Grid item>
+                          <StyledBoxPaper>
+                            <Grid
+                              container
+                              justifyContent="center"
+                              alignItems="center"
+                              direction="row"
+                              padding={2}
+                              spacing={1}
+                            >
+                              <Grid item sx={{ width: "30%", height: "55%" }}>
+                                <StorageIcon
+                                  sx={{ width: "100%", height: "100%" }}
+                                />
+                              </Grid>
+                              <Grid item>
+                                <Grid container direction="column" spacing={1}>
+                                  <Grid item>
+                                    <Typography
+                                      fontSize={15}
+                                      variant="subtitle2"
+                                    >
+                                      Manufacurer: {x.manufacturer}
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item>
+                                    <Typography
+                                      fontSize={15}
+                                      variant="subtitle2"
+                                    >
+                                      Speed: {x.clockSpeed}
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item>
+                                    <Typography
+                                      fontSize={15}
+                                      variant="subtitle2"
+                                    >
+                                      Type: {x.type}
+                                    </Typography>
+                                  </Grid>
+                                </Grid>
+                              </Grid>
+                            </Grid>
+                          </StyledBoxPaper>
+                        </Grid>
+                      ))}
                     </Grid>
                   </Paper>
                 </Grid>
