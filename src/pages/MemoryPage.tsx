@@ -4,7 +4,7 @@ import MemoryGetter from "../utils/MemoryGetter";
 import { Typography, Grid, Paper } from "@mui/material";
 import IMemType from "../common/IMemType";
 import StorageIcon from "@mui/icons-material/Storage";
-import MemoryStackedBar from "../components/MemoryInformationDisplay/MemoryStackedBar";
+import MemoryStackedBar from "../components/MemoryComponents/MemoryStackedBar";
 import { StyledBoxPaper } from "../common/StyledPaper";
 export default function MemoryPage() {
   const { os, sys } = window;
