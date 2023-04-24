@@ -68,7 +68,7 @@ export default function CpuBoard() {
     error: cpuError,
     data: cpuData,
   } = useQuery<ICpuType>("get-cpu-info", () => CpuGetter.AllInfo(os, sys), {
-    retryDelay: 1000,
+    retryDelay: 500,
     onSuccess: (data) => {
       setCpuData((_) => {
         return [..._, ...[data]];
@@ -78,7 +78,7 @@ export default function CpuBoard() {
     refetchInterval: 1,
   });
   useEffect(() => {
-    if (allCpuData.length > 51) {
+    if (allCpuData.length > 31) {
       setCpuData((_) => {
         _.splice(0, 1);
         return _;

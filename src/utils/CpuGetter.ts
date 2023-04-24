@@ -1,6 +1,7 @@
 import ICpuType from "../common/ICpuType";
+import IGetter from "./IGetters";
 
-export default abstract class CpuGetter {
+export default abstract class CpuGetter extends IGetter {
   public static async AllInfo(
     os: typeof import("os"),
     sys: typeof import("systeminformation")
