@@ -21,6 +21,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import logoImage from "./logoImage.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import BatteryChargingFullIcon from "@mui/icons-material/BatteryChargingFull";
 const drawerWidth = 240;
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -116,6 +117,20 @@ export default function MainAppBar() {
                 <StorageIcon />
               </ListItemIcon>
               <ListItemText primary="Memory" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem
+            key="battery"
+            disablePadding
+            onClick={() => {
+              navigate("/battery");
+            }}
+          >
+            <ListItemButton>
+              <ListItemIcon>
+                <BatteryChargingFullIcon />
+              </ListItemIcon>
+              <ListItemText primary="Battery" />
             </ListItemButton>
           </ListItem>
         </List>

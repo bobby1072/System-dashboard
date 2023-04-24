@@ -6,16 +6,18 @@ export default abstract class CpuGetter extends IGetter {
     os: typeof import("os"),
     sys: typeof import("systeminformation")
   ): Promise<ICpuType> {
-    const [system, cpu, usePerc] = await Promise.all([
+    const [system, cpu, usePerc, oss] = await Promise.all([
       sys.system(),
       sys.cpu(),
       sys.currentLoad(),
+      sys.osInfo(),
     ]);
     return {
       cpuGenData: cpu,
       systemData: system,
       usagePerc: usePerc,
       arch: os.arch(),
+      opSys: oss,
     };
   }
 }
