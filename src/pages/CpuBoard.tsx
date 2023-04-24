@@ -84,7 +84,6 @@ export default function CpuBoard() {
         return _;
       });
     }
-    console.log(allCpuData);
   }, [allCpuData]);
   return (
     <div>

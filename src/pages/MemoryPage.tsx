@@ -19,9 +19,6 @@ export default function MemoryPage() {
       retryDelay: 500,
       retry: (count) => count < 5,
       refetchInterval: 1,
-      onSuccess: (data) => {
-        console.log(data);
-      },
     }
   );
   return (
