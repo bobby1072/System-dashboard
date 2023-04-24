@@ -1,8 +1,9 @@
 import { useQuery } from "react-query";
 import MainAppBar from "../components/AppBar/AppBar";
 import MemoryGetter from "../utils/MemoryGetter";
-import { Typography, Grid } from "@mui/material";
+import { Typography, Grid, Paper } from "@mui/material";
 import IMemType from "../common/IMemType";
+import MemoryStackedBar from "../components/MemoryInformationDisplay/MemoryStackedBar";
 export default function MemoryPage() {
   const { os, sys } = window;
   const {
@@ -43,7 +44,31 @@ export default function MemoryPage() {
                 width="100%"
                 minWidth="50vh"
               >
-                <Grid item></Grid>
+                <Grid item>
+                  <Paper>
+                    <Grid
+                      container
+                      justifyContent="center"
+                      alignItems="center"
+                      textAlign="center"
+                      spacing={1}
+                      padding={3}
+                      direction="column"
+                    >
+                      <Grid item>
+                        <Typography fontSize={45} variant="subtitle2">
+                          System RAM {"(Random-Access-Memory)"} Information
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                </Grid>
+                <Grid item>
+                  <MemoryStackedBar
+                    activeMem={memData.memory.active}
+                    totalMem={memData.memory.total}
+                  />
+                </Grid>
               </Grid>
             )}
           </div>
