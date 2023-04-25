@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Typography, Grid, Paper } from "@mui/material";
 import NetworkInterfaces from "../components/NetworkComponents/NetworkInterfaces";
 import INetType from "../common/INetType";
+import CloseNetworks from "../components/NetworkComponents/CloseNetworks";
 export default function NetworkPage() {
   const { os, sys } = window;
   const {
@@ -75,6 +76,9 @@ export default function NetworkPage() {
                 </Grid>
                 <Grid item>
                   <NetworkInterfaces netInterface={netData.networkInterface} />
+                </Grid>
+                <Grid item>
+                  <CloseNetworks wifiNets={netData.wifiNetworks} />
                 </Grid>
               </Grid>
             )}
