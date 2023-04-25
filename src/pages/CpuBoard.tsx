@@ -11,9 +11,9 @@ import {
 import { useEffect, useState } from "react";
 import ICpuType from "../common/ICpuType";
 import CpuGetter from "../utils/CpuGetter";
-import CpuTitle from "../components/CpuInformationDisplay/MainGrid";
-import CpuDashboardDisplay from "../components/CpuInformationDisplay/DashBoardHome";
-import CoreBoard from "../components/CpuInformationDisplay/CoreBoard";
+import CpuTitle from "../components/CpuComponents/MainGrid";
+import CpuDashboardDisplay from "../components/CpuComponents/DashBoardHome";
+import CoreBoard from "../components/CpuComponents/CoreBoard";
 import { Systeminformation } from "systeminformation";
 function averageLoadCpuData(
   data: Systeminformation.CurrentLoadCpuData[]

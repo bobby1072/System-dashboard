@@ -5,6 +5,7 @@ import { ThemeProvider } from "@mui/material";
 import { mainTheme } from "./utils/theme";
 import MemoryPage from "./pages/MemoryPage";
 import { QueryClient, QueryClientProvider } from "react-query";
+import BatteryPage from "./pages/BatteryPage";
 const queryClient = new QueryClient();
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route element={<Navigate to="/cpu" />} path="/" />
             <Route element={<CpuBoard />} path="/cpu" />
             <Route element={<MemoryPage />} path="/memory" />
+            <Route element={<BatteryPage />} path="/battery" />
           </Routes>
         </HashRouter>
       </ThemeProvider>

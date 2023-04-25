@@ -6,7 +6,12 @@ interface IMainCpuProps {
 
 export default function CpuTitle(props: IMainCpuProps) {
   const {
-    device: { arch, cpuGenData, systemData },
+    device: {
+      arch,
+      cpuGenData,
+      systemData,
+      opSys: { distro: version },
+    },
   } = props;
   return (
     <Paper>
@@ -27,6 +32,11 @@ export default function CpuTitle(props: IMainCpuProps) {
         <Grid item>
           <Typography fontSize={45} variant="subtitle2">
             {systemData.model}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Typography fontSize={18} variant="subtitle2">
+            {version}
           </Typography>
         </Grid>
         <Grid item>

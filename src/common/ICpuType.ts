@@ -5,4 +5,5 @@ export default interface ICpuType {
   systemData: Systeminformation.SystemData;
   arch: string;
   usagePerc: Systeminformation.CurrentLoadData;
+  opSys: Systeminformation.OsData;
 }
