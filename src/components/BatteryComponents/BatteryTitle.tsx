@@ -1,6 +1,7 @@
 import { Systeminformation } from "systeminformation";
 import { Grid, Paper, Typography, useTheme } from "@mui/material";
 import BatteryGauge from "react-battery-gauge";
+import { StyledBoxPaper } from "../../common/StyledPaper";
 export default function BatteryTitle({
   batteryInfo,
 }: {
@@ -25,16 +26,30 @@ export default function BatteryTitle({
           </Typography>
         </Grid>
         <Grid item width="50%">
-          <BatteryGauge
-            width="50%"
-            value={Number(
-              (
-                (batteryInfo.currentCapacity / batteryInfo.maxCapacity) *
-                100
-              ).toFixed(0)
-            )}
-            color={theme.palette.primary.main}
-          />
+          <StyledBoxPaper>
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              direction="row"
+              spacing={1}
+              padding={1}
+            >
+              <Grid item>
+                <BatteryGauge
+                  width="50%"
+                  value={Number(
+                    (
+                      (batteryInfo.currentCapacity / batteryInfo.maxCapacity) *
+                      100
+                    ).toFixed(0)
+                  )}
+                  color={theme.palette.primary.main}
+                />
+              </Grid>
+              <Grid item></Grid>
+            </Grid>
+          </StyledBoxPaper>
         </Grid>
       </Grid>
     </Paper>
