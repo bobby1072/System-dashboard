@@ -10,6 +10,7 @@ import {
   AppBar,
   ListItem,
 } from "@mui/material";
+import NetworkCheckIcon from "@mui/icons-material/NetworkCheck";
 import MemoryIcon from "@mui/icons-material/Memory";
 import StorageIcon from "@mui/icons-material/Storage";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -131,6 +132,20 @@ export default function MainAppBar() {
                 <BatteryChargingFullIcon />
               </ListItemIcon>
               <ListItemText primary="Battery" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem
+            key="network"
+            disablePadding
+            onClick={() => {
+              navigate("/network");
+            }}
+          >
+            <ListItemButton>
+              <ListItemIcon>
+                <NetworkCheckIcon />
+              </ListItemIcon>
+              <ListItemText primary="Network" />
             </ListItemButton>
           </ListItem>
         </List>

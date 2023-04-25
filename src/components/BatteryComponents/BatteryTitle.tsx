@@ -16,7 +16,6 @@ export default function BatteryTitle({
       direction="column"
       justifyContent="center"
       alignItems="center"
-      padding={1}
       spacing={2}
       width="100%"
     >
@@ -27,11 +26,12 @@ export default function BatteryTitle({
             direction="column"
             justifyContent="center"
             alignItems="center"
-            padding={2}
+            spacing={1}
+            padding={3}
             width="100%"
           >
             <Grid item>
-              <Typography fontSize={40} variant="subtitle2">
+              <Typography fontSize={45} variant="subtitle2">
                 Battery
               </Typography>
             </Grid>
@@ -63,6 +63,18 @@ export default function BatteryTitle({
                       {batteryInfo.capacityUnit}
                     </Typography>
                   </Grid>
+
+                  <Grid item>
+                    <Typography fontSize={40} variant="subtitle2">
+                      Current capacity:{" "}
+                      {(
+                        (batteryInfo.currentCapacity /
+                          batteryInfo.maxCapacity) *
+                        100
+                      ).toFixed(0)}
+                      %
+                    </Typography>
+                  </Grid>
                   <Grid item>
                     <Grid
                       container
@@ -73,6 +85,8 @@ export default function BatteryTitle({
                     >
                       <Grid item>
                         <BatteryGauge
+                          stroke={theme.palette.primary.main}
+                          charging={batteryInfo.acConnected}
                           value={Number(
                             (
                               (batteryInfo.currentCapacity /
@@ -80,7 +94,6 @@ export default function BatteryTitle({
                               100
                             ).toFixed(0)
                           )}
-                          color={theme.palette.primary.main}
                         />
                       </Grid>
                       <Grid item>
