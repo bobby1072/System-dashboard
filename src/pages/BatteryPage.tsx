@@ -1,5 +1,4 @@
 import { useQuery } from "react-query";
-import { useEffect } from "react";
 import MainAppBar from "../components/AppBar/AppBar";
 import BatteryGetter from "../utils/BatteryGetter";
 import { Grid, Typography } from "@mui/material";
@@ -15,9 +14,6 @@ export default function BatteryPage() {
     retry: (count) => count < 5,
     refetchInterval: 1,
   });
-  useEffect(() => {
-    console.log(batteryData);
-  }, [batteryData]);
   return (
     <div>
       <MainAppBar />
