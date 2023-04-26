@@ -160,7 +160,7 @@ export default function MainAppBar() {
               <ListItemIcon>
                 <TvIcon />
               </ListItemIcon>
-              <ListItemText primary="Graphics" />
+              <ListItemText primary="Screen & Graphics" />
             </ListItemButton>
           </ListItem>
         </List>

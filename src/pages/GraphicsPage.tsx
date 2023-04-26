@@ -6,6 +6,7 @@ import { Systeminformation } from "systeminformation";
 import { useEffect } from "react";
 import ScreenTitle from "../components/GraphicsComponents/ScreenTitle";
 import ScreenInfo from "../components/GraphicsComponents/ScreenInfo";
+import GraphicsInfo from "../components/GraphicsComponents/GraphicsInfo";
 export default function GraphicsPage() {
   const { os, sys } = window;
   const {
@@ -41,6 +42,7 @@ export default function GraphicsPage() {
               <Grid
                 container
                 spacing={2}
+                padding={1}
                 direction="column"
                 justifyContent="center"
                 width="100%"
@@ -51,6 +53,9 @@ export default function GraphicsPage() {
                 </Grid>
                 <Grid item>
                   <ScreenInfo screen={graphsData.displays} />
+                </Grid>
+                <Grid item minHeight="35vh">
+                  <GraphicsInfo graphics={graphsData.controllers} />
                 </Grid>
               </Grid>
             )}

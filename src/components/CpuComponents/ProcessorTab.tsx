@@ -4,7 +4,7 @@ import MemoryIcon from "@mui/icons-material/Memory";
 import { StyledBoxPaper } from "../../common/StyledPaper";
 export default function ProcessorTab({ cpu }: { cpu: ICpuType }) {
   return (
-    <StyledBoxPaper>
+    <StyledBoxPaper sx={{ height: "36vh" }}>
       <Grid
         container
         direction="row"

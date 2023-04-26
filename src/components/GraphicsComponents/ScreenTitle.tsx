@@ -12,7 +12,7 @@ export default function ScreenTitle() {
       >
         <Grid item>
           <Typography fontSize={45} variant="subtitle2">
-            Graphics and Screen
+            Screen & Graphics
           </Typography>
         </Grid>
       </Grid>

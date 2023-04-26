@@ -20,10 +20,18 @@ export default function ScreenInfo({
         spacing={1}
         width="100%"
       >
-        {screen.map((x) => {
+        {screen.map((x, index) => {
           return (
             <Grid item width="50%">
               <StyledBoxPaper>
+                <Typography
+                  textAlign="center"
+                  padding={1}
+                  fontSize={50}
+                  variant="subtitle2"
+                >
+                  Screen: {index + 1}
+                </Typography>
                 <Grid
                   container
                   direction="row"
@@ -69,7 +77,7 @@ export default function ScreenInfo({
                             <CheckCircleIcon color="success" fontSize="large" />
                           </Grid>
                           <Grid item>
-                            <Typography fontSize={40} variant="subtitle2">
+                            <Typography fontSize={35} variant="subtitle2">
                               Main screen
                             </Typography>
                           </Grid>
@@ -85,7 +93,7 @@ export default function ScreenInfo({
                             <CancelIcon color="error" fontSize="large" />
                           </Grid>
                           <Grid item>
-                            <Typography fontSize={40} variant="subtitle2">
+                            <Typography fontSize={35} variant="subtitle2">
                               Not main screen
                             </Typography>
                           </Grid>
