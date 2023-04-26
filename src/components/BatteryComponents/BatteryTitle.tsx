@@ -1,14 +1,16 @@
 import { Systeminformation } from "systeminformation";
-import { Grid, Paper, Typography, useTheme } from "@mui/material";
+import { Button, Grid, Paper, Typography, useTheme } from "@mui/material";
 import BatteryGauge from "react-battery-gauge";
 import { StyledBoxPaper } from "../../common/StyledPaper";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
+import { useState } from "react";
 export default function BatteryTitle({
   batteryInfo,
 }: {
   batteryInfo: Systeminformation.BatteryData;
 }) {
+  const [showPercent, setShowPercent] = useState<boolean>(true);
   const theme = useTheme();
   return (
     <Grid
@@ -16,7 +18,6 @@ export default function BatteryTitle({
       direction="column"
       justifyContent="center"
       alignItems="center"
-      padding={1}
       spacing={2}
       width="100%"
     >
@@ -27,11 +28,12 @@ export default function BatteryTitle({
             direction="column"
             justifyContent="center"
             alignItems="center"
-            padding={2}
+            spacing={1}
+            padding={3}
             width="100%"
           >
             <Grid item>
-              <Typography fontSize={40} variant="subtitle2">
+              <Typography fontSize={45} variant="subtitle2">
                 Battery
               </Typography>
             </Grid>
@@ -63,6 +65,42 @@ export default function BatteryTitle({
                       {batteryInfo.capacityUnit}
                     </Typography>
                   </Grid>
+
+                  <Grid item>
+                    <Grid
+                      container
+                      direction="row"
+                      justifyContent="center"
+                      alignItems="center"
+                      spacing={3}
+                    >
+                      <Grid item>
+                        <Typography fontSize={40} variant="subtitle2">
+                          Current capacity:{" "}
+                          {showPercent
+                            ? (
+                                (batteryInfo.currentCapacity /
+                                  batteryInfo.maxCapacity) *
+                                100
+                              ).toFixed(0) + "%"
+                            : `${batteryInfo.currentCapacity} ${batteryInfo.capacityUnit}`}
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <Button
+                          variant="outlined"
+                          onClick={() => {
+                            if (showPercent) setShowPercent(false);
+                            else setShowPercent(true);
+                          }}
+                        >
+                          {showPercent
+                            ? `${batteryInfo.capacityUnit}`
+                            : "Percent"}
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  </Grid>
                   <Grid item>
                     <Grid
                       container
@@ -73,6 +111,8 @@ export default function BatteryTitle({
                     >
                       <Grid item>
                         <BatteryGauge
+                          stroke={theme.palette.primary.main}
+                          charging={batteryInfo.acConnected}
                           value={Number(
                             (
                               (batteryInfo.currentCapacity /
@@ -80,7 +120,6 @@ export default function BatteryTitle({
                               100
                             ).toFixed(0)
                           )}
-                          color={theme.palette.primary.main}
                         />
                       </Grid>
                       <Grid item>
