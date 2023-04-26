@@ -3,7 +3,6 @@ import MainAppBar from "../components/AppBar/AppBar";
 import GraphicsGetter from "../utils/GraphicsGetter";
 import { Grid, Typography } from "@mui/material";
 import { Systeminformation } from "systeminformation";
-import { useEffect } from "react";
 import ScreenTitle from "../components/GraphicsComponents/ScreenTitle";
 import ScreenInfo from "../components/GraphicsComponents/ScreenInfo";
 import GraphicsInfo from "../components/GraphicsComponents/GraphicsInfo";
@@ -22,9 +21,6 @@ export default function GraphicsPage() {
       refetchInterval: 1,
     }
   );
-  useEffect(() => {
-    console.log(graphsData);
-  }, [graphsData]);
   return (
     <div>
       <MainAppBar />
