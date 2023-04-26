@@ -1,7 +1,6 @@
 import { useQuery } from "react-query";
 import MainAppBar from "../components/AppBar/AppBar";
 import NetworkGetter from "../utils/NetworkGetter";
-import { useEffect } from "react";
 import { Typography, Grid, Paper } from "@mui/material";
 import NetworkInterfaces from "../components/NetworkComponents/NetworkInterfaces";
 import INetType from "../common/INetType";
@@ -17,9 +16,6 @@ export default function NetworkPage() {
     retry: (count) => count < 5,
     refetchInterval: 1,
   });
-  useEffect(() => {
-    console.log(netData);
-  }, [netData]);
   return (
     <div>
       <MainAppBar />
