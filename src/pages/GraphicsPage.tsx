@@ -42,7 +42,6 @@ export default function GraphicsPage() {
                 direction="column"
                 justifyContent="center"
                 width="100%"
-                minWidth="30vh"
               >
                 <Grid item>
                   <ScreenTitle />
@@ -50,7 +49,7 @@ export default function GraphicsPage() {
                 <Grid item>
                   <ScreenInfo screen={graphsData.displays} />
                 </Grid>
-                <Grid item minHeight="35vh">
+                <Grid item>
                   <GraphicsInfo graphics={graphsData.controllers} />
                 </Grid>
               </Grid>

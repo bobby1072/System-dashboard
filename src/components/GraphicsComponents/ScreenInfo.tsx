@@ -1,4 +1,4 @@
-import { Typography, Grid, Paper } from "@mui/material";
+import { Typography, Grid, Paper, Divider } from "@mui/material";
 import { Systeminformation } from "systeminformation";
 import { StyledBoxPaper } from "../../common/StyledPaper";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -32,6 +32,7 @@ export default function ScreenInfo({
                 >
                   Screen: {index + 1}
                 </Typography>
+                <Divider />
                 <Grid
                   container
                   direction="row"
@@ -66,39 +67,44 @@ export default function ScreenInfo({
                           Built in: {x.builtin ? "yes" : "no"}
                         </Typography>
                       </Grid>
-                      {x.main ? (
-                        <Grid
-                          container
-                          direction="row"
-                          justifyContent="center"
-                          alignItems="center"
-                        >
-                          <Grid item>
-                            <CheckCircleIcon color="success" fontSize="large" />
+                      <Grid item>
+                        {x.main ? (
+                          <Grid
+                            container
+                            direction="row"
+                            justifyContent="center"
+                            alignItems="center"
+                          >
+                            <Grid item>
+                              <CheckCircleIcon
+                                color="success"
+                                fontSize="large"
+                              />
+                            </Grid>
+                            <Grid item>
+                              <Typography fontSize={35} variant="subtitle2">
+                                Main screen
+                              </Typography>
+                            </Grid>
                           </Grid>
-                          <Grid item>
-                            <Typography fontSize={35} variant="subtitle2">
-                              Main screen
-                            </Typography>
+                        ) : (
+                          <Grid
+                            container
+                            direction="row"
+                            justifyContent="center"
+                            alignItems="center"
+                          >
+                            <Grid item>
+                              <CancelIcon color="error" fontSize="large" />
+                            </Grid>
+                            <Grid item>
+                              <Typography fontSize={35} variant="subtitle2">
+                                Not main screen
+                              </Typography>
+                            </Grid>
                           </Grid>
-                        </Grid>
-                      ) : (
-                        <Grid
-                          container
-                          direction="row"
-                          justifyContent="center"
-                          alignItems="center"
-                        >
-                          <Grid item>
-                            <CancelIcon color="error" fontSize="large" />
-                          </Grid>
-                          <Grid item>
-                            <Typography fontSize={35} variant="subtitle2">
-                              Not main screen
-                            </Typography>
-                          </Grid>
-                        </Grid>
-                      )}
+                        )}
+                      </Grid>
                     </Grid>
                   </Grid>
                 </Grid>

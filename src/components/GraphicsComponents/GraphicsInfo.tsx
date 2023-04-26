@@ -1,4 +1,4 @@
-import { Paper, Grid, Typography } from "@mui/material";
+import { Paper, Grid, Typography, Divider } from "@mui/material";
 import { Systeminformation } from "systeminformation";
 import { StyledBoxPaper } from "../../common/StyledPaper";
 import CameraIcon from "@mui/icons-material/Camera";
@@ -29,6 +29,7 @@ export default function GraphicsInfo({
               >
                 GPU: {index + 1}
               </Typography>
+              <Divider />
               <Grid
                 container
                 direction="row"
