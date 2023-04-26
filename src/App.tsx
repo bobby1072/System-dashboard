@@ -7,6 +7,7 @@ import MemoryPage from "./pages/MemoryPage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import BatteryPage from "./pages/BatteryPage";
 import NetworkPage from "./pages/NetworkPage";
+import GraphicsPage from "./pages/GraphicsPage";
 const queryClient = new QueryClient();
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route element={<MemoryPage />} path="/memory" />
             <Route element={<BatteryPage />} path="/battery" />
             <Route element={<NetworkPage />} path="/network" />
+            <Route element={<GraphicsPage />} path="/graphics" />
           </Routes>
         </HashRouter>
       </ThemeProvider>

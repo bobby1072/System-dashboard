@@ -47,7 +47,7 @@ export default function NetworkInterfaces({
                 </Grid>
                 <Grid item>
                   <Typography fontSize={23} variant="subtitle2">
-                    MAC address: {x.mac}
+                    MAC address: {x.mac.toUpperCase()}
                   </Typography>
                 </Grid>
                 {x.ip4 && (
