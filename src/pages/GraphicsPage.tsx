@@ -46,7 +46,7 @@ export default function GraphicsPage() {
                 <Grid item>
                   <ScreenTitle />
                 </Grid>
-                <Grid item>
+                <Grid item height="48vh">
                   <ScreenInfo screen={graphsData.displays} />
                 </Grid>
                 <Grid item>
