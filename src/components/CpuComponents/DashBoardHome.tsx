@@ -21,7 +21,7 @@ export default function CpuDashboardDisplay({
     {
       name: "overall cpu usage",
       color: theme.palette.primary.main,
-      data: startDataArray.slice(Math.max(cpuInfo.length - 30, 0)),
+      data: startDataArray.slice(Math.max(cpuInfo.length - 20, 0)),
     },
   ];
   return (

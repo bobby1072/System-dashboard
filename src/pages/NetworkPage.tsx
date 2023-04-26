@@ -32,13 +32,13 @@ export default function NetworkPage() {
             {netData && (
               <Grid
                 container
-                spacing={5}
+                spacing={2}
                 direction="column"
                 justifyContent="center"
                 width="100%"
                 minWidth="30vh"
               >
-                <Grid item>
+                <Grid item minHeight="32vh">
                   <Paper>
                     <Grid
                       container
