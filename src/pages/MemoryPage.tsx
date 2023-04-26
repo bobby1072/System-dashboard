@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import MainAppBar from "../components/AppBar/AppBar";
 import MemoryGetter from "../utils/MemoryGetter";
-import { Typography, Grid, Paper } from "@mui/material";
+import { Typography, Grid, Paper, Divider } from "@mui/material";
 import IMemType from "../common/IMemType";
 import StorageIcon from "@mui/icons-material/Storage";
 import MemoryStackedBar from "../components/MemoryComponents/MemoryStackedBar";
@@ -37,7 +37,7 @@ export default function MemoryPage() {
             {memData && (
               <Grid
                 container
-                spacing={2}
+                spacing={3}
                 direction="column"
                 justifyContent="center"
                 width="100%"
@@ -79,11 +79,20 @@ export default function MemoryPage() {
                       textAlign="center"
                       direction="row"
                       padding={2}
+                      minHeight="42vh"
                       spacing={1}
                     >
                       {memData.memoryLayout.map((x, index) => (
                         <Grid item width="50%" minHeight="25vh">
                           <StyledBoxPaper>
+                            <Typography
+                              textAlign="center"
+                              padding={1}
+                              fontSize={50}
+                            >
+                              RAM stick: {index + 1}
+                            </Typography>
+                            <Divider />
                             <Grid
                               container
                               justifyContent="center"
@@ -99,11 +108,6 @@ export default function MemoryPage() {
                               </Grid>
                               <Grid item>
                                 <Grid container direction="column" spacing={1}>
-                                  <Grid item>
-                                    <Typography fontSize={20}>
-                                      RAM stick: {index + 1}
-                                    </Typography>
-                                  </Grid>
                                   <Grid item>
                                     <Typography
                                       fontSize={15}

@@ -50,7 +50,7 @@ export default function BatteryTitle({
             padding={2}
             width="100%"
           >
-            <Grid item>
+            <Grid item width="100%">
               <StyledBoxPaper sx={{ padding: 3 }}>
                 <Grid
                   container

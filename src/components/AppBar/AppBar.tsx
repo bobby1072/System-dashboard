@@ -15,6 +15,7 @@ import MemoryIcon from "@mui/icons-material/Memory";
 import StorageIcon from "@mui/icons-material/Storage";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import TvIcon from "@mui/icons-material/Tv";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -146,6 +147,20 @@ export default function MainAppBar() {
                 <NetworkCheckIcon />
               </ListItemIcon>
               <ListItemText primary="Network" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem
+            key="graphics"
+            disablePadding
+            onClick={() => {
+              navigate("/graphics");
+            }}
+          >
+            <ListItemButton>
+              <ListItemIcon>
+                <TvIcon />
+              </ListItemIcon>
+              <ListItemText primary="Screen & Graphics" />
             </ListItemButton>
           </ListItem>
         </List>
